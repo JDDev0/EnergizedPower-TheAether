@@ -1,0 +1,11 @@
+{
+  "type": "energizedpower:sawmill",
+  "ingredient": {
+    "item": "aether:skyroot_chest_boat"
+  },
+  "output": {
+    "count": 5,
+    "item": "aether:skyroot_planks"
+  },
+  "sawdustAmount": 7
+}

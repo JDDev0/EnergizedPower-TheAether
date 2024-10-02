@@ -1,0 +1,10 @@
+{
+  "type": "energizedpower:sawmill",
+  "ingredient": {
+    "item": "aether:skyroot_shovel"
+  },
+  "output": {
+    "item": "aether:skyroot_planks"
+  },
+  "sawdustAmount": 2
+}

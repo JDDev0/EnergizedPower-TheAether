@@ -1,0 +1,9 @@
+{
+  "type": "energizedpower:crusher",
+  "ingredient": {
+    "item": "aether:holystone_bricks"
+  },
+  "output": {
+    "item": "aether:holystone"
+  }
+}

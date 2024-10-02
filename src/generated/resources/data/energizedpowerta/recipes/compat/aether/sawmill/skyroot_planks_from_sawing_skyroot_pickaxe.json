@@ -1,0 +1,11 @@
+{
+  "type": "energizedpower:sawmill",
+  "ingredient": {
+    "item": "aether:skyroot_pickaxe"
+  },
+  "output": {
+    "count": 3,
+    "item": "aether:skyroot_planks"
+  },
+  "sawdustAmount": 2
+}

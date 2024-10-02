@@ -1,0 +1,14 @@
+{
+  "type": "energizedpower:sawmill",
+  "ingredient": {
+    "item": "aether:skyroot_bookshelf"
+  },
+  "output": {
+    "count": 6,
+    "item": "aether:skyroot_planks"
+  },
+  "secondaryOutput": {
+    "count": 3,
+    "item": "minecraft:book"
+  }
+}
