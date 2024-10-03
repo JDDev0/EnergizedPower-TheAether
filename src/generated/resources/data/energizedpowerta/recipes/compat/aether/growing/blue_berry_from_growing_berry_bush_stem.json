@@ -1,0 +1,27 @@
+{
+  "type": "energizedpower:plant_growth_chamber",
+  "ingredient": {
+    "item": "aether:berry_bush_stem"
+  },
+  "outputs": [
+    {
+      "output": {
+        "item": "aether:berry_bush_stem"
+      },
+      "percentages": [
+        1.0
+      ]
+    },
+    {
+      "output": {
+        "item": "aether:blue_berry"
+      },
+      "percentages": [
+        1.0,
+        0.75,
+        0.25
+      ]
+    }
+  ],
+  "ticks": 16000
+}

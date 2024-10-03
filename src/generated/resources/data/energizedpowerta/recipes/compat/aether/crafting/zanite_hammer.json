@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "M": {
+      "tag": "aether:gems/zanite"
+    },
+    "S": {
+      "tag": "aether:skyroot_stick"
+    }
+  },
+  "pattern": [
+    " M ",
+    " SM",
+    "S  "
+  ],
+  "result": {
+    "item": "energizedpowerta:zanite_hammer"
+  }
+}

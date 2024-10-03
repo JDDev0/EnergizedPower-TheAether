@@ -1,10 +1,16 @@
 package me.jddev0.epta;
 
 import com.mojang.logging.LogUtils;
+import me.jddev0.ep.item.ModCreativeModeTab;
+import me.jddev0.epta.item.ModItems;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
@@ -14,7 +20,27 @@ public class EnergizedPowerTAMod {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public EnergizedPowerTAMod() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModItems.register(modEventBus);
+
+        modEventBus.addListener(this::addCreativeTab);
+        modEventBus.addListener(this::commonSetup);
+    }
+
+    private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
+        if(event.getTab() == ModCreativeModeTab.ENERGIZED_POWER_TAB.get()) {
+            event.accept(ModItems.SKYROOT_HAMMER);
+            event.accept(ModItems.HOLYSTONE_HAMMER);
+            event.accept(ModItems.ZANITE_HAMMER);
+            event.accept(ModItems.GRAVITITE_HAMMER);
+
+            event.accept(ModItems.SKYROOT_DIRTY_WATER_BUCKET);
+        }
+    }
+
+    public void commonSetup(FMLCommonSetupEvent event) {
+        ModItems.setupBucketReplacements();
     }
 
     @SubscribeEvent
