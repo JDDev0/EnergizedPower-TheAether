@@ -1,5 +1,4 @@
 {
-  "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_ingredient": {
       "conditions": {
@@ -29,5 +28,5 @@
       "energizedpowerta:compat/aether/crafting/skyroot_hammer"
     ]
   },
-  "sends_telemetry_event": false
+  "sends_telemetry_event": true
 }
