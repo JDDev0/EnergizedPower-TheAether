@@ -29,6 +29,5 @@
     "recipes": [
       "energizedpowerta:compat/aether/crafting/holystone_hammer"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

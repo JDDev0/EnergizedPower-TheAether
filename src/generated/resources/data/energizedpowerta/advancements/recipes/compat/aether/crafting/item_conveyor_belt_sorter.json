@@ -29,6 +29,5 @@
     "recipes": [
       "energizedpowerta:compat/aether/crafting/item_conveyor_belt_sorter"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

@@ -7,6 +7,7 @@ import com.aetherteam.aether.item.AetherItems;
 import me.jddev0.ep.block.ModBlocks;
 import me.jddev0.ep.datagen.recipe.*;
 import me.jddev0.ep.registry.tags.CommonItemTags;
+import me.jddev0.ep.util.ItemStackUtils;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
 import me.jddev0.epta.item.ModItems;
@@ -15,7 +16,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -23,7 +24,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
@@ -38,20 +38,20 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     private static final String THE_AETHER_MOD_ID = Aether.MODID;
     private static final String PATH_PREFIX = "compat/" + THE_AETHER_MOD_ID + "/";
 
-    public ModRecipeProvider(PackOutput output) {
+    public ModRecipeProvider(DataGenerator output) {
         super(output);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> output) {
-        buildCraftingRecipes(output);
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> output) {
+        buildCraftingTableRecipes(output);
         buildCrusherRecipes(output);
         buildPulverizerRecipes(output);
         buildSawmillRecipes(output);
         buildPlantGrowthChamberRecipes(output);
     }
 
-    private void buildCraftingRecipes(Consumer<FinishedRecipe> output) {
+    private void buildCraftingTableRecipes(Consumer<FinishedRecipe> output) {
         buildToolsCraftingRecipes(output);
 
         buildItemTransportCraftingRecipes(output);
@@ -71,7 +71,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "CCC",
                 "CHC",
                 "CcC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get()), CraftingBookCategory.MISC);
+        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get()));
 
         addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
@@ -82,7 +82,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "CRC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SORTER_ITEM.get()), CraftingBookCategory.MISC);
+        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SORTER_ITEM.get()));
 
         addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
@@ -94,7 +94,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "ClC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SWITCH_ITEM.get()), CraftingBookCategory.MISC);
+        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SWITCH_ITEM.get()));
 
         addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
@@ -105,7 +105,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "CIC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SPLITTER_ITEM.get()), CraftingBookCategory.MISC);
+        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SPLITTER_ITEM.get()));
 
         addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
@@ -116,7 +116,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "CRC",
                 "ILI",
                 "CIC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_MERGER_ITEM.get()), CraftingBookCategory.MISC);
+        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_MERGER_ITEM.get()));
     }
 
     private void buildCrusherRecipes(Consumer<FinishedRecipe> output) {
@@ -194,7 +194,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 " M ",
                 " SM",
                 "S  "
-        }, new ItemStack(hammerItem), CraftingBookCategory.MISC);
+        }, new ItemStack(hammerItem));
     }
     private static void addHammerCraftingRecipe(Consumer<FinishedRecipe> output, TagKey<Item> materialInput, ItemLike hammerItem) {
         addShapedCraftingRecipe(output, has(materialInput), Map.of(
@@ -204,29 +204,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 " M ",
                 " SM",
                 "S  "
-        }, new ItemStack(hammerItem), CraftingBookCategory.MISC);
+        }, new ItemStack(hammerItem));
     }
     private static void addShapedCraftingRecipe(Consumer<FinishedRecipe> output, InventoryChangeTrigger.TriggerInstance hasIngredientTrigger,
-                                                Map<Character, Ingredient> key, String[] pattern,
-                                                ItemStack result, CraftingBookCategory category) {
-        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, category, "");
+                                                Map<Character, Ingredient> key, String[] pattern, ItemStack result) {
+        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, "");
     }
     private static void addShapedCraftingRecipe(Consumer<FinishedRecipe> output, InventoryChangeTrigger.TriggerInstance hasIngredientTrigger,
-                                                Map<Character, Ingredient> key, String[] pattern,
-                                                ItemStack result, CraftingBookCategory category,
-                                                String group) {
-        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, category, group, "");
+                                                Map<Character, Ingredient> key, String[] pattern, ItemStack result, String group) {
+        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, group, "");
     }
     private static void addShapedCraftingRecipe(Consumer<FinishedRecipe> output, InventoryChangeTrigger.TriggerInstance hasIngredientTrigger,
-                                                Map<Character, Ingredient> key, String[] pattern,
-                                                ItemStack result, CraftingBookCategory category,
-                                                String group, String recipeIdSuffix) {
-        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, category, group, recipeIdSuffix, "");
+                                                Map<Character, Ingredient> key, String[] pattern, ItemStack result, String group, String recipeIdSuffix) {
+        addShapedCraftingRecipe(output, hasIngredientTrigger, key, pattern, result, group, recipeIdSuffix, "");
     }
     private static void addShapedCraftingRecipe(Consumer<FinishedRecipe> output, InventoryChangeTrigger.TriggerInstance hasIngredientTrigger,
-                                                Map<Character, Ingredient> key, String[] pattern,
-                                                ItemStack result, CraftingBookCategory category,
-                                                String group, String recipeIdSuffix, String recipeIdPrefix) {
+                                                Map<Character, Ingredient> key, String[] pattern, ItemStack result, String group, String recipeIdSuffix,
+                                                String recipeIdPrefix) {
         ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
                 recipeIdPrefix + getItemName(result.getItem()) + recipeIdSuffix);
 
@@ -238,9 +232,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         ShapedFinishedRecipe recipe = new ShapedFinishedRecipe(
                 recipeId,
                 Objects.requireNonNullElse(group, ""),
-                category, key, pattern, result,
+                key, pattern, result,
                 advancementBuilder,
-                recipeId.withPrefix("recipes/")
+                withPrefix(recipeId, "recipes/")
         );
         output.accept(recipe);
     }
@@ -281,7 +275,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                                   Ingredient doorInput, Ingredient trapdoorInput, Ingredient pressurePlateInput,
                                                   Ingredient signInput, Ingredient boatInput, Ingredient chestBoatInput,
                                                   boolean isRaft, String woodName) {
-        addSawmillRecipe(recipeOutput, logsInput, planksItem.copyWithCount(6), 1, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, logsInput, ItemStackUtils.copyWithCount(planksItem, 6), 1, getItemName(planksItem.getItem()),
                 woodName + "_logs");
 
         addBasicWoodWithoutLogsSawmillRecipe(recipeOutput, planksItem, fenceInput, fenceGateInput, doorInput, trapdoorInput,
@@ -295,9 +289,9 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         addBasicWoodWithoutLogsAndBoatsSawmillRecipe(recipeOutput, planksItem, fenceInput, fenceGateInput, doorInput,
                 trapdoorInput, pressurePlateInput, signInput, woodName);
 
-        addSawmillRecipe(recipeOutput, boatInput, planksItem.copyWithCount(4), 3, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, boatInput, ItemStackUtils.copyWithCount(planksItem, 4), 3, getItemName(planksItem.getItem()),
                 woodName + (isRaft?"_raft":"_boat"));
-        addSawmillRecipe(recipeOutput, chestBoatInput, planksItem.copyWithCount(5), 7, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, chestBoatInput, ItemStackUtils.copyWithCount(planksItem, 5), 7, getItemName(planksItem.getItem()),
                 woodName + (isRaft?"_chest_raft":"_chest_boat"));
     }
     private void addBasicWoodWithoutLogsAndBoatsSawmillRecipe(Consumer<FinishedRecipe> recipeOutput, ItemStack planksItem,
@@ -306,15 +300,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                                                      Ingredient signInput, String woodName) {
         addSawmillRecipe(recipeOutput, fenceInput, planksItem, 2, getItemName(planksItem.getItem()),
                 woodName + "_fence");
-        addSawmillRecipe(recipeOutput, fenceGateInput, planksItem.copyWithCount(2), 3, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, fenceGateInput, ItemStackUtils.copyWithCount(planksItem, 2), 3, getItemName(planksItem.getItem()),
                 woodName + "_fence_gate");
         addSawmillRecipe(recipeOutput, doorInput, planksItem, 3, getItemName(planksItem.getItem()),
                 woodName + "_door");
-        addSawmillRecipe(recipeOutput, trapdoorInput, planksItem.copyWithCount(2), 3, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, trapdoorInput, ItemStackUtils.copyWithCount(planksItem, 2), 3, getItemName(planksItem.getItem()),
                 woodName + "_trapdoor");
         addSawmillRecipe(recipeOutput, pressurePlateInput, planksItem, 2, getItemName(planksItem.getItem()),
                 woodName + "_pressure_plate");
-        addSawmillRecipe(recipeOutput, signInput, planksItem.copyWithCount(2), 1, getItemName(planksItem.getItem()),
+        addSawmillRecipe(recipeOutput, signInput, ItemStackUtils.copyWithCount(planksItem, 2), 1, getItemName(planksItem.getItem()),
                 woodName + "_sign");
     }
     private void addSawmillRecipe(Consumer<FinishedRecipe> recipeOutput, Ingredient input, ItemStack output,
@@ -359,6 +353,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 outputs, input, ticks
         );
         recipeOutput.accept(recipe);
+    }
+
+    public static ResourceLocation withPrefix(ResourceLocation resourceLocation, String pathPrefix) {
+        return new ResourceLocation(resourceLocation.getNamespace(), pathPrefix + resourceLocation.getPath());
     }
 
     private static InventoryChangeTrigger.TriggerInstance has(RegistryObject<Item> item) {

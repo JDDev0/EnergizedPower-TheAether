@@ -4,7 +4,7 @@ plugins {
     id 'net.minecraftforge.gradle' version '6.0.+'
 }
 
-version = '1.20.1-1.0.0-forge-dev'
+version = '1.19.2-1.0.0-forge-dev'
 group = 'me.jddev0.energizedpowerta' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'energizedpowerta'
 
@@ -26,7 +26,7 @@ minecraft {
     //
     // Use non-default mappings at your own risk. They may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: '1.20.1'
+    mappings channel: 'official', version: '1.19.2'
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -173,24 +173,24 @@ dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.20.1-47.1.0'
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.7'
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
     // Energized Power dependency
-    compileOnly fg.deobf("curse.maven:energized-power-782147:5746760")
+    compileOnly fg.deobf("curse.maven:energized-power-782147:5746748")
 
-    localRuntime fg.deobf("curse.maven:energized-power-782147:5746760")
+    localRuntime fg.deobf("curse.maven:energized-power-782147:5746748")
 
     // The Aether
-    compileOnly fg.deobf("curse.maven:aether-255308:5302178")
+    compileOnly fg.deobf("curse.maven:aether-255308:5302176")
 
-    localRuntime fg.deobf("curse.maven:aether-255308:5302178")
+    localRuntime fg.deobf("curse.maven:aether-255308:5302176")
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    localRuntime fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.101")
+    localRuntime fg.deobf("mezz.jei:jei-1.19.2-forge:11.8.0.1030")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

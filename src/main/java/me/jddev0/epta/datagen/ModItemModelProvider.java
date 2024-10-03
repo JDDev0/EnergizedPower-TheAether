@@ -2,7 +2,7 @@ package me.jddev0.epta.datagen;
 
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.epta.item.ModItems;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
@@ -11,7 +11,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+    public ModItemModelProvider(DataGenerator output, ExistingFileHelper existingFileHelper) {
         super(output, EnergizedPowerTAMod.MODID, existingFileHelper);
     }
 

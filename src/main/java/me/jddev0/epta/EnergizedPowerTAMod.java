@@ -1,10 +1,8 @@
 package me.jddev0.epta;
 
 import com.mojang.logging.LogUtils;
-import me.jddev0.ep.item.ModCreativeModeTab;
 import me.jddev0.epta.item.ModItems;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,19 +22,7 @@ public class EnergizedPowerTAMod {
 
         ModItems.register(modEventBus);
 
-        modEventBus.addListener(this::addCreativeTab);
         modEventBus.addListener(this::commonSetup);
-    }
-
-    private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTab() == ModCreativeModeTab.ENERGIZED_POWER_TAB.get()) {
-            event.accept(ModItems.SKYROOT_HAMMER);
-            event.accept(ModItems.HOLYSTONE_HAMMER);
-            event.accept(ModItems.ZANITE_HAMMER);
-            event.accept(ModItems.GRAVITITE_HAMMER);
-
-            event.accept(ModItems.SKYROOT_DIRTY_WATER_BUCKET);
-        }
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {

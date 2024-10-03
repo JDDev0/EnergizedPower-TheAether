@@ -29,6 +29,5 @@
     "recipes": [
       "energizedpowerta:compat/aether/crafting/item_conveyor_belt_splitter"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }

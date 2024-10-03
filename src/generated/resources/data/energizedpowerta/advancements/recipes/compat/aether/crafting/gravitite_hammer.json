@@ -27,6 +27,5 @@
     "recipes": [
       "energizedpowerta:compat/aether/crafting/gravitite_hammer"
     ]
-  },
-  "sends_telemetry_event": true
+  }
 }
