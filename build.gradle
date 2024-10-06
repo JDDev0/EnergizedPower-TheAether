@@ -183,9 +183,9 @@ dependencies {
     localRuntime fg.deobf("curse.maven:energized-power-782147:5746760")
 
     // The Aether
-    compileOnly fg.deobf("curse.maven:aether-255308:5302178")
+    compileOnly fg.deobf("curse.maven:aether-255308:5786709")
 
-    localRuntime fg.deobf("curse.maven:aether-255308:5302178")
+    localRuntime fg.deobf("curse.maven:aether-255308:5786709")
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
