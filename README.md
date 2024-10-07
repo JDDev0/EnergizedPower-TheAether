@@ -1,5 +1,7 @@
 # EnergizedPower-TheAether
-Compatibility between Energized Power and The Aether
+Compatibility between Energized Power and The Aether<br>
+Download on CurseForge: [Energized Power - The Aether](https://www.curseforge.com/minecraft/mc-mods/energized-power-the-aether)<br>
+Download on Modrinth: [Energized Power - The Aether](https://modrinth.com/mod/energized-power-ta)
 
 ## Information
 
