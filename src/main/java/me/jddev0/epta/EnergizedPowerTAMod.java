@@ -1,7 +1,7 @@
 package me.jddev0.epta;
 
 import com.mojang.logging.LogUtils;
-import me.jddev0.epta.item.ModItems;
+import me.jddev0.epta.item.EPTAItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,13 +20,13 @@ public class EnergizedPowerTAMod {
     public EnergizedPowerTAMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
+        EPTAItems.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
-        ModItems.setupBucketReplacements();
+        EPTAItems.setupBucketReplacements();
     }
 
     @SubscribeEvent

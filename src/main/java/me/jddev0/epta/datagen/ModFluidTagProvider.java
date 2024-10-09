@@ -1,7 +1,7 @@
 package me.jddev0.epta.datagen;
 
 import com.aetherteam.aether.AetherTags;
-import me.jddev0.ep.fluid.ModFluids;
+import me.jddev0.ep.fluid.EPFluids;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.FluidTagsProvider;
@@ -16,7 +16,7 @@ public class ModFluidTagProvider extends FluidTagsProvider {
     @Override
     protected void addTags() {
         tag(AetherTags.Fluids.ALLOWED_BUCKET_PICKUP).
-                add(ModFluids.DIRTY_WATER.get(),
-                        ModFluids.FLOWING_DIRTY_WATER.get());
+                add(EPFluids.DIRTY_WATER.get(),
+                        EPFluids.FLOWING_DIRTY_WATER.get());
     }
 }

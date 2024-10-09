@@ -4,13 +4,13 @@ import com.aetherteam.aether.Aether;
 import com.aetherteam.aether.AetherTags;
 import com.aetherteam.aether.block.AetherBlocks;
 import com.aetherteam.aether.item.AetherItems;
-import me.jddev0.ep.block.ModBlocks;
+import me.jddev0.ep.block.EPBlocks;
 import me.jddev0.ep.datagen.recipe.*;
 import me.jddev0.ep.registry.tags.CommonItemTags;
 import me.jddev0.ep.util.ItemStackUtils;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
-import me.jddev0.epta.item.ModItems;
+import me.jddev0.epta.item.EPTAItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.RequirementsStrategy;
@@ -57,66 +57,66 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         buildItemTransportCraftingRecipes(output);
     }
     private void buildToolsCraftingRecipes(Consumer<FinishedRecipe> output) {
-        addHammerCraftingRecipe(output, AetherTags.Items.SKYROOT_TOOL_CRAFTING, ModItems.SKYROOT_HAMMER.get());
-        addHammerCraftingRecipe(output, AetherBlocks.HOLYSTONE.get(), ModItems.HOLYSTONE_HAMMER.get());
-        addHammerCraftingRecipe(output, AetherTags.Items.GEMS_ZANITE, ModItems.ZANITE_HAMMER.get());
-        addHammerCraftingRecipe(output, AetherTags.Items.PROCESSED_GRAVITITE, ModItems.GRAVITITE_HAMMER.get());
+        addHammerCraftingRecipe(output, AetherTags.Items.SKYROOT_TOOL_CRAFTING, EPTAItems.SKYROOT_HAMMER.get());
+        addHammerCraftingRecipe(output, AetherBlocks.HOLYSTONE.get(), EPTAItems.HOLYSTONE_HAMMER.get());
+        addHammerCraftingRecipe(output, AetherTags.Items.GEMS_ZANITE, EPTAItems.ZANITE_HAMMER.get());
+        addHammerCraftingRecipe(output, AetherTags.Items.PROCESSED_GRAVITITE, EPTAItems.GRAVITITE_HAMMER.get());
     }
     private void buildItemTransportCraftingRecipes(Consumer<FinishedRecipe> output) {
-        addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_ITEM), Map.of(
+        addShapedCraftingRecipe(output, has(EPBlocks.ITEM_CONVEYOR_BELT_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
-                'c', Ingredient.of(ModBlocks.ITEM_CONVEYOR_BELT_ITEM.get()),
+                'c', Ingredient.of(EPBlocks.ITEM_CONVEYOR_BELT_ITEM.get()),
                 'H', Ingredient.of(Items.HOPPER)
         ), new String[] {
                 "CCC",
                 "CHC",
                 "CcC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get()));
+        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get()));
 
-        addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, has(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.of(Tags.Items.STORAGE_BLOCKS_IRON),
                 'R', Ingredient.of(Tags.Items.STORAGE_BLOCKS_REDSTONE),
-                'L', Ingredient.of(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
+                'L', Ingredient.of(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
         ), new String[] {
                 "CRC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SORTER_ITEM.get()));
+        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SORTER_ITEM.get()));
 
-        addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, has(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.of(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.of(Tags.Items.DUSTS_REDSTONE),
                 'l', Ingredient.of(Items.LEVER),
-                'L', Ingredient.of(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
+                'L', Ingredient.of(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
         ), new String[] {
                 "ClC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SWITCH_ITEM.get()));
+        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SWITCH_ITEM.get()));
 
-        addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, has(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.of(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.of(Tags.Items.DUSTS_REDSTONE),
-                'L', Ingredient.of(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
+                'L', Ingredient.of(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
         ), new String[] {
                 "CIC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_SPLITTER_ITEM.get()));
+        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SPLITTER_ITEM.get()));
 
-        addShapedCraftingRecipe(output, has(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, has(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.of(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.of(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.of(Tags.Items.DUSTS_REDSTONE),
-                'L', Ingredient.of(ModBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
+                'L', Ingredient.of(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM.get())
         ), new String[] {
                 "CRC",
                 "ILI",
                 "CIC"
-        }, new ItemStack(ModBlocks.ITEM_CONVEYOR_BELT_MERGER_ITEM.get()));
+        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_MERGER_ITEM.get()));
     }
 
     private void buildCrusherRecipes(Consumer<FinishedRecipe> output) {
@@ -165,7 +165,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 2, "skyroot_planks", "skyroot_axe");
         addSawmillRecipe(output, Ingredient.of(AetherItems.SKYROOT_HOE.get()), new ItemStack(AetherBlocks.SKYROOT_PLANKS.get(), 2),
                 2, "skyroot_planks", "skyroot_hoe");
-        addSawmillRecipe(output, Ingredient.of(ModItems.SKYROOT_HAMMER.get()), new ItemStack(AetherBlocks.SKYROOT_PLANKS.get(), 2),
+        addSawmillRecipe(output, Ingredient.of(EPTAItems.SKYROOT_HAMMER.get()), new ItemStack(AetherBlocks.SKYROOT_PLANKS.get(), 2),
                 2, "skyroot_planks", "skyroot_hammer");
 
         addSawmillRecipe(output, Ingredient.of(AetherBlocks.SKYROOT_PLANKS.get()), new ItemStack(AetherItems.SKYROOT_STICK.get(), 3),

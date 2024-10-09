@@ -178,9 +178,9 @@ dependencies {
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
     // Energized Power dependency
-    compileOnly fg.deobf("curse.maven:energized-power-782147:5746748")
+    compileOnly fg.deobf("curse.maven:energized-power-782147:5797543")
 
-    localRuntime fg.deobf("curse.maven:energized-power-782147:5746748")
+    localRuntime fg.deobf("curse.maven:energized-power-782147:5797543")
 
     // The Aether
     compileOnly fg.deobf("curse.maven:aether-255308:5786710")
