@@ -2,7 +2,7 @@ package me.jddev0.epta.datagen;
 
 import me.jddev0.ep.registry.tags.CommonItemTags;
 import me.jddev0.epta.EnergizedPowerTAMod;
-import me.jddev0.epta.item.ModItems;
+import me.jddev0.epta.item.EPTAItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -23,9 +23,9 @@ public class ModItemTagProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider lookupProvider) {
         tag(CommonItemTags.TOOLS_HAMMERS).
-                add(ModItems.SKYROOT_HAMMER.get()).
-                add(ModItems.HOLYSTONE_HAMMER.get()).
-                add(ModItems.ZANITE_HAMMER.get()).
-                add(ModItems.GRAVITITE_HAMMER.get());
+                add(EPTAItems.SKYROOT_HAMMER.get()).
+                add(EPTAItems.HOLYSTONE_HAMMER.get()).
+                add(EPTAItems.ZANITE_HAMMER.get()).
+                add(EPTAItems.GRAVITITE_HAMMER.get());
     }
 }

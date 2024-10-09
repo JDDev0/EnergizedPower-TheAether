@@ -1,8 +1,8 @@
 package me.jddev0.epta;
 
 import com.mojang.logging.LogUtils;
-import me.jddev0.ep.item.ModCreativeModeTab;
-import me.jddev0.epta.item.ModItems;
+import me.jddev0.ep.item.EPCreativeModeTab;
+import me.jddev0.epta.item.EPTAItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -22,25 +22,25 @@ public class EnergizedPowerTAMod {
     public EnergizedPowerTAMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(modEventBus);
+        EPTAItems.register(modEventBus);
 
         modEventBus.addListener(this::addCreativeTab);
         modEventBus.addListener(this::commonSetup);
     }
 
     private void addCreativeTab(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTab() == ModCreativeModeTab.ENERGIZED_POWER_TAB.get()) {
-            event.accept(ModItems.SKYROOT_HAMMER);
-            event.accept(ModItems.HOLYSTONE_HAMMER);
-            event.accept(ModItems.ZANITE_HAMMER);
-            event.accept(ModItems.GRAVITITE_HAMMER);
+        if(event.getTab() == EPCreativeModeTab.ENERGIZED_POWER_TAB.get()) {
+            event.accept(EPTAItems.SKYROOT_HAMMER);
+            event.accept(EPTAItems.HOLYSTONE_HAMMER);
+            event.accept(EPTAItems.ZANITE_HAMMER);
+            event.accept(EPTAItems.GRAVITITE_HAMMER);
 
-            event.accept(ModItems.SKYROOT_DIRTY_WATER_BUCKET);
+            event.accept(EPTAItems.SKYROOT_DIRTY_WATER_BUCKET);
         }
     }
 
     public void commonSetup(FMLCommonSetupEvent event) {
-        ModItems.setupBucketReplacements();
+        EPTAItems.setupBucketReplacements();
     }
 
     @SubscribeEvent

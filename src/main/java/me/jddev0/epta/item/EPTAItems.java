@@ -3,7 +3,7 @@ package me.jddev0.epta.item;
 import com.aetherteam.aether.item.AetherItems;
 import com.aetherteam.aether.item.combat.AetherItemTiers;
 import com.aetherteam.aether.item.miscellaneous.bucket.SkyrootBucketItem;
-import me.jddev0.ep.fluid.ModFluids;
+import me.jddev0.ep.fluid.EPFluids;
 import me.jddev0.ep.item.HammerItem;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import net.minecraft.world.item.Item;
@@ -12,8 +12,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public final class ModItems {
-    private ModItems() {}
+public final class EPTAItems {
+    private EPTAItems() {}
 
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, EnergizedPowerTAMod.MODID);
 
@@ -27,10 +27,10 @@ public final class ModItems {
             () -> new HammerItem(AetherItemTiers.GRAVITITE, new Item.Properties()));
 
     public static final RegistryObject<Item> SKYROOT_DIRTY_WATER_BUCKET = ITEMS.register("skyroot_dirty_water_bucket",
-            () -> new SkyrootBucketItem(ModFluids.DIRTY_WATER, new Item.Properties().craftRemainder(AetherItems.SKYROOT_BUCKET.get()).stacksTo(1)));
+            () -> new SkyrootBucketItem(EPFluids.DIRTY_WATER, new Item.Properties().craftRemainder(AetherItems.SKYROOT_BUCKET.get()).stacksTo(1)));
 
     public static void setupBucketReplacements() {
-        SkyrootBucketItem.REPLACEMENTS.put(ModFluids.DIRTY_WATER_BUCKET_ITEM, SKYROOT_DIRTY_WATER_BUCKET);
+        SkyrootBucketItem.REPLACEMENTS.put(EPFluids.DIRTY_WATER_BUCKET_ITEM, SKYROOT_DIRTY_WATER_BUCKET);
     }
 
     public static void register(IEventBus modEventBus) {
