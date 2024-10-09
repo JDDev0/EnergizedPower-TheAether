@@ -1,7 +1,7 @@
 package me.jddev0.epta.datagen;
 
 import me.jddev0.epta.EnergizedPowerTAMod;
-import me.jddev0.epta.item.ModItems;
+import me.jddev0.epta.item.EPTAItems;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -23,12 +23,12 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
 
     private void registerBasicModels() {
-        basicItem(ModItems.SKYROOT_HAMMER);
-        basicItem(ModItems.HOLYSTONE_HAMMER);
-        basicItem(ModItems.ZANITE_HAMMER);
-        basicItem(ModItems.GRAVITITE_HAMMER);
+        basicItem(EPTAItems.SKYROOT_HAMMER);
+        basicItem(EPTAItems.HOLYSTONE_HAMMER);
+        basicItem(EPTAItems.ZANITE_HAMMER);
+        basicItem(EPTAItems.GRAVITITE_HAMMER);
 
-        basicItem(ModItems.SKYROOT_DIRTY_WATER_BUCKET);
+        basicItem(EPTAItems.SKYROOT_DIRTY_WATER_BUCKET);
     }
 
     private ItemModelBuilder basicItem(Holder<Item> item) {
