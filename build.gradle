@@ -131,9 +131,9 @@ dependencies {
     localRuntime "curse.maven:energized-power-782147:5797578"
 
     // The Aether
-    compileOnly "curse.maven:aether-255308:5786711"
+    compileOnly "curse.maven:aether-255308:5889512"
 
-    localRuntime "curse.maven:aether-255308:5786711"
+    localRuntime "curse.maven:aether-255308:5889512"
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
