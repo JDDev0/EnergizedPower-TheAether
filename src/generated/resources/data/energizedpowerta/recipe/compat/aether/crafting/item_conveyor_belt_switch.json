@@ -6,21 +6,25 @@
       "item": "aether:holystone"
     },
     "I": {
-      "tag": "forge:plates/iron"
+      "tag": "c:plates/iron"
     },
     "L": {
       "item": "energizedpower:item_conveyor_belt_loader"
     },
     "R": {
-      "tag": "forge:dusts/redstone"
+      "tag": "c:dusts/redstone"
+    },
+    "l": {
+      "item": "minecraft:lever"
     }
   },
   "pattern": [
-    "CIC",
+    "ClC",
     "ILI",
     "CRC"
   ],
   "result": {
-    "item": "energizedpower:item_conveyor_belt_splitter"
+    "count": 1,
+    "id": "energizedpower:item_conveyor_belt_switch"
   }
 }

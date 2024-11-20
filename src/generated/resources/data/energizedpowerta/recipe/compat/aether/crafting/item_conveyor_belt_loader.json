@@ -18,6 +18,7 @@
     "CcC"
   ],
   "result": {
-    "item": "energizedpower:item_conveyor_belt_loader"
+    "count": 1,
+    "id": "energizedpower:item_conveyor_belt_loader"
   }
 }

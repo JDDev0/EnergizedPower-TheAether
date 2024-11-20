@@ -26,7 +26,7 @@ public final class EPTAItems {
             () -> new HammerItem(AetherItemTiers.GRAVITITE, new Item.Properties()));
 
     public static final DeferredItem<Item> SKYROOT_DIRTY_WATER_BUCKET = ITEMS.register("skyroot_dirty_water_bucket",
-            () -> new SkyrootBucketItem(EPFluids.DIRTY_WATER, new Item.Properties().craftRemainder(AetherItems.SKYROOT_BUCKET.get()).stacksTo(1)));
+            () -> new SkyrootBucketItem(EPFluids.DIRTY_WATER.get(), new Item.Properties().craftRemainder(AetherItems.SKYROOT_BUCKET.get()).stacksTo(1)));
 
     public static void setupBucketReplacements() {
         SkyrootBucketItem.REPLACEMENTS.put(EPFluids.DIRTY_WATER_BUCKET_ITEM, SKYROOT_DIRTY_WATER_BUCKET);

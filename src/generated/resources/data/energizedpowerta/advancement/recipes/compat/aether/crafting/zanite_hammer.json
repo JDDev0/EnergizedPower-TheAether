@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "energizedpower:item_conveyor_belt_loader"
-            ]
+            "items": "#aether:gems/zanite"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "energizedpowerta:compat/aether/crafting/item_conveyor_belt_merger"
+        "recipe": "energizedpowerta:compat/aether/crafting/zanite_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,8 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "energizedpowerta:compat/aether/crafting/item_conveyor_belt_merger"
+      "energizedpowerta:compat/aether/crafting/zanite_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

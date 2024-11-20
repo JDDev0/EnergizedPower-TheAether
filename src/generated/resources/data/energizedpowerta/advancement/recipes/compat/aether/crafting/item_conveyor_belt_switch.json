@@ -5,9 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "energizedpower:item_conveyor_belt_loader"
-            ]
+            "items": "energizedpower:item_conveyor_belt_loader"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "energizedpowerta:compat/aether/crafting/item_conveyor_belt_sorter"
+        "recipe": "energizedpowerta:compat/aether/crafting/item_conveyor_belt_switch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,8 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "energizedpowerta:compat/aether/crafting/item_conveyor_belt_sorter"
+      "energizedpowerta:compat/aether/crafting/item_conveyor_belt_switch"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

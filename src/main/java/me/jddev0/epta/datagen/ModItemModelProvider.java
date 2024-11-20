@@ -35,6 +35,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         ResourceLocation itemID = Objects.requireNonNull(item.unwrapKey().orElseThrow()).location();
 
         return withExistingParent(itemID.getPath(), "generated")
-                .texture("layer0", new ResourceLocation(itemID.getNamespace(), "item/" + itemID.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemID.getNamespace(), "item/" + itemID.getPath()));
     }
 }

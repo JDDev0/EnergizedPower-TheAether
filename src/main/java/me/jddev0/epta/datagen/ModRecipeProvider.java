@@ -5,7 +5,6 @@ import com.aetherteam.aether.AetherTags;
 import com.aetherteam.aether.block.AetherBlocks;
 import com.aetherteam.aether.item.AetherItems;
 import me.jddev0.ep.block.EPBlocks;
-import me.jddev0.ep.datagen.recipe.*;
 import me.jddev0.ep.registry.tags.CommonItemTags;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
@@ -27,6 +26,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
@@ -228,7 +229,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                                 Map<Character, Ingredient> key, String[] pattern,
                                                 ItemStack result, CraftingBookCategory category,
                                                 String group, String recipeIdSuffix, String recipeIdPrefix) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
                 recipeIdPrefix + getItemName(result.getItem()) + recipeIdSuffix);
 
         Advancement.Builder advancementBuilder = output.advancement()
@@ -236,24 +237,21 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .addCriterion("has_the_ingredient", hasIngredientTrigger)
                 .rewards(AdvancementRewards.Builder.recipe(recipeId))
                 .requirements(AdvancementRequirements.Strategy.OR);
-        ShapedFinishedRecipe recipe = new ShapedFinishedRecipe(
-                recipeId,
+        ShapedRecipe recipe = new ShapedRecipe(
                 Objects.requireNonNullElse(group, ""),
-                category, key, pattern, result,
-                advancementBuilder.build(recipeId.withPrefix("recipes/"))
+                category, ShapedRecipePattern.of(key, pattern), result
         );
-        output.accept(recipe);
+        output.accept(recipeId, recipe, advancementBuilder.build(recipeId.withPrefix("recipes/")));
     }
 
     private void addCrusherRecipe(RecipeOutput recipeOutput, Ingredient input, ItemStack output, String recipeIngredientName) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crusher/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crusher/" +
                 getItemName(output.getItem()) + "_from_crushing_" + recipeIngredientName);
 
-        CrusherFinishedRecipe recipe = new CrusherFinishedRecipe(
-                recipeId,
+        CrusherRecipe recipe = new CrusherRecipe(
                 output, input
         );
-        recipeOutput.accept(recipe);
+        recipeOutput.accept(recipeId, recipe, null);
     }
 
     private static void addPulverizerRecipe(RecipeOutput recipeOutput, Ingredient input,
@@ -266,14 +264,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                                             PulverizerRecipe.OutputItemStackWithPercentages output,
                                             PulverizerRecipe.OutputItemStackWithPercentages secondaryOutput,
                                             String recipeIngredientName) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "pulverizer/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "pulverizer/" +
                 getItemName(output.output().getItem()) + "_from_pulverizer_" + recipeIngredientName);
 
-        PulverizerFinishedRecipe recipe = new PulverizerFinishedRecipe(
-                recipeId,
+        PulverizerRecipe recipe = new PulverizerRecipe(
                 output, secondaryOutput, input
         );
-        recipeOutput.accept(recipe);
+        recipeOutput.accept(recipeId, recipe, null);
     }
 
     private void addBasicWoodSawmillRecipe(RecipeOutput recipeOutput, ItemStack planksItem,
@@ -319,25 +316,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     }
     private void addSawmillRecipe(RecipeOutput recipeOutput, Ingredient input, ItemStack output,
                                          int sawdustAmount, String outputName, String recipeIngredientName) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "sawmill/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "sawmill/" +
                 outputName + "_from_sawing_" + recipeIngredientName);
 
-        SawmillFinishedRecipe recipe = new SawmillFinishedRecipe(
-                recipeId,
+        SawmillRecipe recipe = new SawmillRecipe(
                 output, input, sawdustAmount
         );
-        recipeOutput.accept(recipe);
+        recipeOutput.accept(recipeId, recipe, null);
     }
     private static void addSawmillRecipe(RecipeOutput recipeOutput, Ingredient input, ItemStack output,
                                          ItemStack secondaryOutput, String outputName, String recipeIngredientName) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "sawmill/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "sawmill/" +
                 outputName + "_from_sawing_" + recipeIngredientName);
 
-        SawmillFinishedRecipe recipe = new SawmillFinishedRecipe(
-                recipeId,
+        SawmillRecipe recipe = new SawmillRecipe(
                 output, secondaryOutput, input
         );
-        recipeOutput.accept(recipe);
+        recipeOutput.accept(recipeId, recipe, null);
     }
 
     private void addBasicFlowerGrowingRecipe(RecipeOutput recipeOutput, ItemLike flowerItem,
@@ -351,13 +346,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     private void addPlantGrowthChamberRecipe(RecipeOutput recipeOutput, Ingredient input,
                                              OutputItemStackWithPercentages[] outputs, int ticks,
                                              String outputName, String recipeIngredientName) {
-        ResourceLocation recipeId = new ResourceLocation(EnergizedPowerTAMod.MODID, PATH_PREFIX + "growing/" +
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "growing/" +
                 outputName + "_from_growing_" + recipeIngredientName);
 
-        PlantGrowthChamberFinishedRecipe recipe = new PlantGrowthChamberFinishedRecipe(
-                recipeId,
+        PlantGrowthChamberRecipe recipe = new PlantGrowthChamberRecipe(
                 outputs, input, ticks
         );
-        recipeOutput.accept(recipe);
+        recipeOutput.accept(recipeId, recipe, null);
     }
 }

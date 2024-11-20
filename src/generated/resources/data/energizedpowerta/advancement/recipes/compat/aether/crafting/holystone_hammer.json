@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "aether:skyroot_tool_crafting"
+            "items": "aether:holystone"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "energizedpowerta:compat/aether/crafting/skyroot_hammer"
+        "recipe": "energizedpowerta:compat/aether/crafting/holystone_hammer"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,8 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "energizedpowerta:compat/aether/crafting/skyroot_hammer"
+      "energizedpowerta:compat/aether/crafting/holystone_hammer"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

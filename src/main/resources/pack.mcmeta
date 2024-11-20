@@ -1,8 +1,0 @@
-{
-    "pack": {
-        "description": "Resources used for Energized Power - The Aether",
-        "pack_format": 18,
-        "forge:client_resources_pack_format": 18,
-        "forge:server_data_pack_format": 18
-    }
-}

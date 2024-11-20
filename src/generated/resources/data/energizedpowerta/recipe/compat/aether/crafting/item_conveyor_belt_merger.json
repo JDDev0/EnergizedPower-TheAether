@@ -6,21 +6,22 @@
       "item": "aether:holystone"
     },
     "I": {
-      "tag": "forge:storage_blocks/iron"
+      "tag": "c:plates/iron"
     },
     "L": {
       "item": "energizedpower:item_conveyor_belt_loader"
     },
     "R": {
-      "tag": "forge:storage_blocks/redstone"
+      "tag": "c:dusts/redstone"
     }
   },
   "pattern": [
     "CRC",
     "ILI",
-    "CRC"
+    "CIC"
   ],
   "result": {
-    "item": "energizedpower:item_conveyor_belt_sorter"
+    "count": 1,
+    "id": "energizedpower:item_conveyor_belt_merger"
   }
 }

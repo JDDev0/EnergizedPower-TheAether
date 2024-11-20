@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.5'
+    id 'net.neoforged.gradle.userdev' version '7.0.165'
 }
 
 version = mod_version
@@ -42,8 +42,7 @@ base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 // Default run configurations.
 // These can be tweaked, removed, or duplicated as needed.
@@ -79,7 +78,30 @@ runs {
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
+        arguments '--nogui'
+
+        // Change run folder location
+        workingDirectory project.file('run')
+
+        // Fix mixin dependencies
+        systemProperty 'mixin.env.remapRefMap', 'true'
+        systemProperty 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+    }
+
+    gameTestServer {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        arguments '--nogui'
+
+        // Change run folder location
+        workingDirectory project.file('run')
+
+        // Fix mixin dependencies
+        systemProperty 'mixin.env.remapRefMap', 'true'
+        systemProperty 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+    }
+
+    junit {
+        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
 
         // Change run folder location
         workingDirectory project.file('run')
@@ -101,7 +123,7 @@ runs {
         systemProperty 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
         // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        arguments '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
     }
 }
 
@@ -126,19 +148,20 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // Energized Power dependency
-    compileOnly "curse.maven:energized-power-782147:5797578"
+    compileOnly "curse.maven:energized-power-782147:5797585"
 
-    localRuntime "curse.maven:energized-power-782147:5797578"
+    localRuntime "curse.maven:energized-power-782147:5797585"
 
     // The Aether
-    compileOnly "curse.maven:aether-255308:5889512"
+    compileOnly "curse.maven:aether-255308:5904253"
 
-    localRuntime "curse.maven:aether-255308:5889512"
+    localRuntime "curse.maven:aether-255308:5904253"
+    localRuntime "curse.maven:owo-lib-532610:5900556"
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:13.1.773"
+    localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:16.0.788"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -155,7 +178,7 @@ tasks.withType(ProcessResources).configureEach {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml']) {
         expand replaceProperties + [project: project]
     }
 }
@@ -190,4 +213,12 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }
