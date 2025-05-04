@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "me.jddev0.epta.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "aether.RarityEnumConstantDevelopmentFix",
+    "aether.SpawnGroupEnumConstantDevelopmentFix",
+    "aether.RecipeBookCategoryEnumConstantDevelopmentFix",
+    "aether.RecipeBookGroupEnumConstantDevelopmentFix",
+    "aether.SkyrootDirtyWaterBucketSetRecipeRemainderHook",
+
+    "item.ItemRecipeRemainderSetter"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

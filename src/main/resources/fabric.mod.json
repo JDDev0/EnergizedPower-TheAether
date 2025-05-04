@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "energizedpowerta",
+	"version": "${version}",
+	"name": "Energized Power - The Aether",
+	"description": "Compatibility between Energized Power and The Aether",
+	"authors": [
+		"JDDev0"
+	],
+	"contact": {
+		"homepage": "https://github.com/JDDev0/EnergizedPower-TheAether",
+		"sources": "https://github.com/JDDev0/EnergizedPower-TheAether",
+		"issues": "https://github.com/JDDev0/EnergizedPower-TheAether/issues",
+		"email": "jddev0@dorneger.at"
+	},
+	"license": "MIT",
+	"icon": "assets/energizedpowerta/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"fabric-datagen": [
+			"me.jddev0.epta.datagen.EnergizedPowerTADataGenerators"
+		],
+		"main": [
+			"me.jddev0.epta.EnergizedPowerTAMod"
+		],
+		"client": [
+			"me.jddev0.epta.EnergizedPowerTAModClient"
+		]
+	},
+	"mixins": [
+		"energizedpowerta.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.0",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*",
+
+		"energizedpower": "*",
+
+		"aether": "*"
+	},
+	"suggests": {
+		"emi": "*",
+		"jei": "*",
+		"rei": "*"
+	}
+}

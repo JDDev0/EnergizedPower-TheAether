@@ -1,24 +1,20 @@
 package me.jddev0.epta.datagen;
 
-import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.epta.item.EPTAItems;
-import net.minecraft.core.Holder;
-import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.data.client.ItemModelGenerator;
+import net.minecraft.data.client.ModelIds;
+import net.minecraft.data.client.Models;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
 
-import java.util.Objects;
+public class ModItemModelProvider {
+    private final ItemModelGenerator generator;
 
-public class ModItemModelProvider extends ItemModelProvider {
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, EnergizedPowerTAMod.MODID, existingFileHelper);
+    ModItemModelProvider(ItemModelGenerator generator) {
+        this.generator = generator;
     }
 
-    @Override
-    protected void registerModels() {
+    void registerItems() {
         registerBasicModels();
     }
 
@@ -31,10 +27,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(EPTAItems.SKYROOT_DIRTY_WATER_BUCKET);
     }
 
-    private ItemModelBuilder basicItem(Holder<Item> item) {
-        ResourceLocation itemID = Objects.requireNonNull(item.unwrapKey().orElseThrow()).location();
+    private Identifier basicItem(Item item) {
+        generator.register(item, Models.GENERATED);
 
-        return withExistingParent(itemID.getPath(), "generated")
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(itemID.getNamespace(), "item/" + itemID.getPath()));
+        return ModelIds.getItemModelId(item);
     }
 }

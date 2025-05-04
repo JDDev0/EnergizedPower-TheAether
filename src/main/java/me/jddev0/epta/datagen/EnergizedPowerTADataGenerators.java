@@ -1,35 +1,19 @@
 package me.jddev0.epta.datagen;
 
-import me.jddev0.epta.EnergizedPowerTAMod;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 
-import java.util.concurrent.CompletableFuture;
+public class EnergizedPowerTADataGenerators implements DataGeneratorEntrypoint {
+    @Override
+    public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
+        FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
-@EventBusSubscriber(modid = EnergizedPowerTAMod.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class EnergizedPowerTADataGenerators {
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput output = generator.getPackOutput();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        pack.addProvider(ModModelProvider::new);
 
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        pack.addProvider(ModRecipeProvider::new);
 
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(output, existingFileHelper));
-
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(output, lookupProvider));
-
-        ModBlockTagProvider blockTagProvider = generator.addProvider(event.includeServer(),
-                new ModBlockTagProvider(output, lookupProvider, existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModItemTagProvider(output, lookupProvider,
-                blockTagProvider.contentsGetter(), existingFileHelper));
-        generator.addProvider(event.includeServer(), new ModFluidTagProvider(output, lookupProvider, existingFileHelper));
+        pack.addProvider(ModItemTagProvider::new);
+        pack.addProvider(ModBlockTagProvider::new);
+        pack.addProvider(ModFluidTagProvider::new);
     }
 }
