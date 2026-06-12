@@ -3,6 +3,7 @@ import net.fabricmc.loom.LoomGradleExtension
 plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
+    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
 }
 
 version = project.mod_version
@@ -94,16 +95,18 @@ dependencies {
     }
 
     // Energized Power dependency
-    modCompileOnly "curse.maven:energized-power-782147:5797537"
+    //TODO FIX: modCompileOnly "curse.maven:energized-power-782147:8238845"
+    modCompileOnly "local:energizedpower-3.0.0-beta.2+1.21.1-fabric:3.0.0-beta.2+1.21.1-fabric"
 
-    modLocalRuntime "curse.maven:energized-power-782147:5797537"
+    //TODO FIX: modLocalRuntime "curse.maven:energized-power-782147:8238845"
+    modLocalRuntime "local:energizedpower-3.0.0-beta.2+1.21.1-fabric:3.0.0-beta.2+1.21.1-fabric"
 
     // The Aether
-    modCompileOnly "curse.maven:aether-255308:6389869"
+    modCompileOnly "curse.maven:aether-255308:7062820"
 
-    modLocalRuntime "curse.maven:aether-255308:6389869"
-    modLocalRuntime "curse.maven:cumulus-915473:6389023"
-    modLocalRuntime "curse.maven:accessories-938917:6454794"
+    modLocalRuntime "curse.maven:aether-255308:7062820"
+    modLocalRuntime "curse.maven:cumulus-915473:7079155"
+    modLocalRuntime "io.wispforest:accessories-fabric:1.1.0-beta.53+1.21.1"
     modLocalRuntime "curse.maven:forge-config-api-port-fabric-547434:5982384"
     modLocalRuntime "io.github.llamalad7:mixinextras-fabric:0.5.0-beta.3"
     modLocalRuntime "com.aetherteam.nitrogen:nitrogen_internals:1.21.1-1.1.21-fabric"
@@ -160,6 +163,37 @@ publishing {
         // Notice: This block does NOT have the same function as the block in the top level.
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
+    }
+}
+
+publishMods {
+    displayName = "Energized Power - TA - " + "1.21.1" + " - v" + project.mod_version.split("\\+")[0] + " [Fabric]"
+    changelog = new File("CHANGELOG.md").exists()?new File("CHANGELOG.md").getText("UTF-8"):""
+    type = BETA //TODO change to STABLE if v3.0.0 is no longer in beta
+    file = remapJar.archiveFile
+    modLoaders.add("fabric")
+
+    dryRun = project.mod_version.contains("dev")
+
+    if(project.hasProperty('MODRINTH_TOKEN')) {
+        modrinth {
+            accessToken = getProperty('MODRINTH_TOKEN') as String
+            projectId = "3tCbCCSA"
+            minecraftVersionList("1.21.1")
+            requires("fabric-api", "energized-power", "aether")
+        }
+    }
+
+    if(project.hasProperty('CURSEFORGE_TOKEN')) {
+        curseforge {
+            accessToken = getProperty('CURSEFORGE_TOKEN') as String
+            projectId = "1114929"
+            minecraftVersionList("1.21.1")
+            requires("fabric-api", "energized-power", "aether")
+            client = true
+            server = true
+            javaVersions.add(JavaVersion.VERSION_21)
+        }
     }
 }
 

@@ -4,8 +4,11 @@ import com.aetherteam.aether.Aether;
 import com.aetherteam.aether.AetherTags;
 import com.aetherteam.aether.block.AetherBlocks;
 import com.aetherteam.aether.item.AetherItems;
+import me.jddev0.ep.api.EPAPI;
 import me.jddev0.ep.block.EPBlocks;
 import me.jddev0.ep.registry.tags.CommonItemTags;
+import me.jddev0.ep.soil.EPSoilTypeTags;
+import me.jddev0.ep.soil.SoilType;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
 import me.jddev0.epta.item.EPTAItems;
@@ -19,6 +22,8 @@ import net.minecraft.advancement.AdvancementRewards;
 import net.minecraft.advancement.criterion.InventoryChangedCriterion;
 import net.minecraft.advancement.criterion.RecipeUnlockedCriterion;
 import net.minecraft.data.server.recipe.RecipeExporter;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.Fluids;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
@@ -64,60 +69,60 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         addHammerCraftingRecipe(output, AetherTags.Items.PROCESSED_GRAVITITE, EPTAItems.GRAVITITE_HAMMER);
     }
     private void buildItemTransportCraftingRecipes(RecipeExporter output) {
-        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.ITEM_CONVEYOR_BELT_ITEM), Map.of(
+        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_ITEM), Map.of(
                 'C', Ingredient.ofItems(AetherBlocks.HOLYSTONE.get()),
-                'c', Ingredient.ofItems(EPBlocks.ITEM_CONVEYOR_BELT_ITEM),
+                'c', Ingredient.ofItems(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_ITEM),
                 'H', Ingredient.ofItems(Items.HOPPER)
         ), new String[] {
                 "CCC",
                 "CHC",
                 "CcC"
-        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), CraftingRecipeCategory.MISC);
+        }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM), CraftingRecipeCategory.MISC);
 
-        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.ofItems(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.fromTag(ConventionalItemTags.STORAGE_BLOCKS_IRON),
                 'R', Ingredient.fromTag(ConventionalItemTags.STORAGE_BLOCKS_REDSTONE),
-                'L', Ingredient.ofItems(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM)
+                'L', Ingredient.ofItems(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM)
         ), new String[] {
                 "CRC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SORTER_ITEM), CraftingRecipeCategory.MISC);
+        }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_SORTER_ITEM), CraftingRecipeCategory.MISC);
 
-        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.ofItems(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.fromTag(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.fromTag(ConventionalItemTags.REDSTONE_DUSTS),
                 'l', Ingredient.ofItems(Items.LEVER),
-                'L', Ingredient.ofItems(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM)
+                'L', Ingredient.ofItems(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM)
         ), new String[] {
                 "ClC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SWITCH_ITEM), CraftingRecipeCategory.MISC);
+        }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_SWITCH_ITEM), CraftingRecipeCategory.MISC);
 
-        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.ofItems(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.fromTag(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.fromTag(ConventionalItemTags.REDSTONE_DUSTS),
-                'L', Ingredient.ofItems(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM)
+                'L', Ingredient.ofItems(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM)
         ), new String[] {
                 "CIC",
                 "ILI",
                 "CRC"
-        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_SPLITTER_ITEM), CraftingRecipeCategory.MISC);
+        }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_SPLITTER_ITEM), CraftingRecipeCategory.MISC);
 
-        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
+        addShapedCraftingRecipe(output, conditionsFromItem(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM), Map.of(
                 'C', Ingredient.ofItems(AetherBlocks.HOLYSTONE.get()),
                 'I', Ingredient.fromTag(CommonItemTags.PLATES_IRON),
                 'R', Ingredient.fromTag(ConventionalItemTags.REDSTONE_DUSTS),
-                'L', Ingredient.ofItems(EPBlocks.ITEM_CONVEYOR_BELT_LOADER_ITEM)
+                'L', Ingredient.ofItems(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_LOADER_ITEM)
         ), new String[] {
                 "CRC",
                 "ILI",
                 "CIC"
-        }, new ItemStack(EPBlocks.ITEM_CONVEYOR_BELT_MERGER_ITEM), CraftingRecipeCategory.MISC);
+        }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_MERGER_ITEM), CraftingRecipeCategory.MISC);
     }
 
     private void buildCrusherRecipes(RecipeExporter output) {
@@ -184,7 +189,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 new OutputItemStackWithPercentages(new ItemStack(AetherItems.BLUE_BERRY.get()), new double[] {
                         1., .75, .25
                 })
-        }, 16000, "blue_berry", "berry_bush_stem");
+        }, EPSoilTypeTags.CROPS, Fluids.WATER, 0.0625, 4000, "blue_berry", "berry_bush_stem");
     }
 
     private static void addHammerCraftingRecipe(RecipeExporter output, ItemConvertible materialInput, ItemConvertible hammerItem) {
@@ -334,23 +339,29 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         RecipeExporter.accept(recipeId, recipe, null);
     }
 
-    private void addBasicFlowerGrowingRecipe(RecipeExporter RecipeExporter, ItemConvertible flowerItem,
-                                                    String outputName) {
-        addPlantGrowthChamberRecipe(RecipeExporter, Ingredient.ofItems(flowerItem), new OutputItemStackWithPercentages[] {
+    private void addBasicFlowerGrowingRecipe(RecipeExporter recipeExporter, ItemConvertible flowerItem, String outputName) {
+        addPlantGrowthChamberRecipe(recipeExporter, Ingredient.ofItems(flowerItem), new OutputItemStackWithPercentages[] {
                 new OutputItemStackWithPercentages(new ItemStack(flowerItem), new double[] {
                         1., 1., .33
                 })
-        }, 16000, outputName, getItemPath(flowerItem));
+        }, EPSoilTypeTags.FLOWERS, Fluids.WATER, 0.0625, 4000, outputName, getItemPath(flowerItem));
     }
-    private void addPlantGrowthChamberRecipe(RecipeExporter RecipeExporter, Ingredient input,
-                                             OutputItemStackWithPercentages[] outputs, int ticks,
+    private void addPlantGrowthChamberRecipe(RecipeExporter recipeExporter, Ingredient input,
+                                             OutputItemStackWithPercentages[] outputs,
+                                             TagKey<SoilType> soilType,
+                                             Fluid fluid, double fluidConsumption, int ticks,
+                                             String outputName, String recipeIngredientName) {
+        addPlantGrowthChamberRecipe(recipeExporter, input, outputs, soilType, new Fluid[] {fluid}, fluidConsumption, ticks, outputName, recipeIngredientName);
+    }
+    private void addPlantGrowthChamberRecipe(RecipeExporter recipeExporter, Ingredient input,
+                                             OutputItemStackWithPercentages[] outputs,
+                                             TagKey<SoilType> soilType,
+                                             Fluid[] fluid, double fluidConsumption, int ticks,
                                              String outputName, String recipeIngredientName) {
         Identifier recipeId = Identifier.of(EnergizedPowerTAMod.MODID, PATH_PREFIX + "growing/" +
                 outputName + "_from_growing_" + recipeIngredientName);
 
-        PlantGrowthChamberRecipe recipe = new PlantGrowthChamberRecipe(
-                outputs, input, ticks
-        );
-        RecipeExporter.accept(recipeId, recipe, null);
+        PlantGrowthChamberRecipe recipe = new PlantGrowthChamberRecipe(outputs, input, soilType, fluid, fluidConsumption, ticks);
+        recipeExporter.accept(recipeId, recipe, null);
     }
 }
