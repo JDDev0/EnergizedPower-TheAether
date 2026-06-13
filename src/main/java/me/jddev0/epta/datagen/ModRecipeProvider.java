@@ -196,7 +196,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 new OutputItemStackWithPercentages(new ItemStack(AetherItems.BLUE_BERRY.get()), new double[] {
                         1., .75, .25
                 })
-        }, EPSoilTypeTags.CROPS, Fluids.WATER, 0.0625, 4000, "blue_berry", "berry_bush_stem");
+        }, EPSoilTypeTags.FLOWERS, Fluids.WATER, 0.0625, 4000, "blue_berry", "berry_bush_stem");
     }
 
     private void buildPlantGrowthChamberSoilRecipes(RecipeOutput output) {

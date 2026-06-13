@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-13T13:17:57.833365226	Energized Power - The Aether/Recipes
+// 1.21.1	2026-06-13T13:19:32.324622515	Energized Power - The Aether/Recipes
 77de05a984afac9a4489b228008f2304f9c540e0 data/energizedpowerta/recipe/compat/aether/crafting/aether_farmland.json
 544fd4f70a6fa2a0fc48589be65f88d82627c76b data/energizedpowerta/advancement/recipes/compat/aether/crafting/gravitite_hammer.json
 bc8dfbd0103e39922920e82e507c1937798c3df5 data/energizedpowerta/recipe/compat/aether/crafting/item_conveyor_belt_switch.json
@@ -16,7 +16,7 @@ ce7e7c7b2ceb869d1b66b69efc85df0eb2526fb4 data/energizedpowerta/recipe/compat/aet
 ed566327fbff33388c168ed0ad499be42b9e250e data/energizedpowerta/recipe/compat/aether/crafting/skyroot_hammer.json
 93c11e117430b67ef821095427ebf9f1e9276679 data/energizedpowerta/recipe/compat/aether/crafting/item_conveyor_belt_splitter.json
 8e3a095333400ef4220b7a5a60815b6b8fc7088f data/energizedpowerta/recipe/compat/aether/crafting/item_conveyor_belt_sorter.json
-aaa88e3a7fe372f2cfa5d17f5b5ca92b8d655c0f data/energizedpowerta/recipe/compat/aether/growing/blue_berry_from_growing_berry_bush_stem.json
+a5cb329ee9d0edb4d0b11d9c2a71ec51f3511d30 data/energizedpowerta/recipe/compat/aether/growing/blue_berry_from_growing_berry_bush_stem.json
 91e40eace0eac2941ebd76c1b4368a0c6431fbbc data/energizedpowerta/recipe/compat/aether/crafting/item_conveyor_belt_merger.json
 7048261500081052a79826a3d9c94172a4594171 data/energizedpowerta/recipe/compat/aether/sawmill/skyroot_planks_from_sawing_skyroot_bucket.json
 624945749b3857ce04db6db214ac24ae4103a8e1 data/energizedpowerta/recipe/compat/aether/sawmill/skyroot_planks_from_sawing_skyroot_fence.json
