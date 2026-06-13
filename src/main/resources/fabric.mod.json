@@ -25,6 +25,15 @@
 		],
 		"client": [
 			"me.jddev0.epta.EnergizedPowerTAModClient"
+		],
+		"rei_client": [
+			"me.jddev0.epta.integration.rei.EnergizedPowerTAREIPlugin"
+		],
+		"jei_mod_plugin": [
+			"me.jddev0.epta.integration.jei.EnergizedPowerTAJEIPlugin"
+		],
+		"emi": [
+			"me.jddev0.epta.integration.emi.EnergizedPowerTAEMIPlugin"
 		]
 	},
 	"mixins": [
