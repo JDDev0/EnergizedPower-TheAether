@@ -3,6 +3,7 @@ package me.jddev0.epta;
 import com.mojang.logging.LogUtils;
 import me.jddev0.ep.item.EPCreativeModeTab;
 import me.jddev0.epta.item.EPTAItems;
+import me.jddev0.epta.recipe.EPTARecipes;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -21,6 +22,7 @@ public class EnergizedPowerTAMod {
 
     public EnergizedPowerTAMod(IEventBus modEventBus) {
         EPTAItems.register(modEventBus);
+        EPTARecipes.register(modEventBus);
 
         modEventBus.addListener(this::addCreativeTab);
         modEventBus.addListener(this::commonSetup);

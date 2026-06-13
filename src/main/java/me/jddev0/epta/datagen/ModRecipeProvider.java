@@ -7,10 +7,12 @@ import com.aetherteam.aether.item.AetherItems;
 import me.jddev0.ep.block.EPBlocks;
 import me.jddev0.ep.registry.tags.CommonItemTags;
 import me.jddev0.ep.soil.EPSoilTypeTags;
+import me.jddev0.ep.soil.EPSoilTypes;
 import me.jddev0.ep.soil.SoilType;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
 import me.jddev0.epta.item.EPTAItems;
+import me.jddev0.epta.recipe.AetherFarmlandCraftingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -21,15 +23,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.ShapedRecipe;
-import net.minecraft.world.item.crafting.ShapedRecipePattern;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
@@ -39,6 +39,7 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Function;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     private static final String THE_AETHER_MOD_ID = Aether.MODID;
@@ -55,12 +56,15 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         buildPulverizerRecipes(output);
         buildSawmillRecipes(output);
         buildPlantGrowthChamberRecipes(output);
+        buildPlantGrowthChamberSoilRecipes(output);
     }
 
     private void buildCraftingRecipes(RecipeOutput output) {
         buildToolsCraftingRecipes(output);
 
         buildItemTransportCraftingRecipes(output);
+
+        buildCustomCraftingRecipes(output);
     }
     private void buildToolsCraftingRecipes(RecipeOutput output) {
         addHammerCraftingRecipe(output, AetherTags.Items.SKYROOT_TOOL_CRAFTING, EPTAItems.SKYROOT_HAMMER);
@@ -123,6 +127,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 "ILI",
                 "CIC"
         }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_MERGER_ITEM.get()), CraftingBookCategory.MISC);
+    }
+    private void buildCustomCraftingRecipes(RecipeOutput output) {
+        addCustomCraftingRecipe(output, AetherFarmlandCraftingRecipe::new, CraftingBookCategory.MISC,
+                "aether_farmland");
     }
 
     private void buildCrusherRecipes(RecipeOutput output) {
@@ -192,6 +200,17 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }, EPSoilTypeTags.CROPS, Fluids.WATER, 0.0625, 4000, "blue_berry", "berry_bush_stem");
     }
 
+    private void buildPlantGrowthChamberSoilRecipes(RecipeOutput output) {
+        addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.AETHER_FARMLAND),
+                EPSoilTypes.FARMLAND, 1.5, 1.0, 0.8, "aether_farmland");
+        addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.AETHER_DIRT),
+                EPSoilTypes.DIRT, 1.0, 1.0, 1.0, "aether_dirt");
+        addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.AETHER_GRASS_BLOCK),
+                EPSoilTypes.GRASS, 1.1, 1.0, 1.0, "aether_grass");
+        addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.ENCHANTED_AETHER_GRASS_BLOCK),
+                EPSoilTypes.GRASS, 1.3, 1.0, 1.0, "enchanted_aether_grass");
+    }
+
     private static void addHammerCraftingRecipe(RecipeOutput output, ItemLike materialInput, ItemLike hammerItem) {
         addShapedCraftingRecipe(output, has(materialInput), Map.of(
                 'S', Ingredient.of(AetherTags.Items.SKYROOT_STICKS),
@@ -246,6 +265,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 category, ShapedRecipePattern.of(key, pattern), result
         );
         output.accept(recipeId, recipe, advancementBuilder.build(recipeId.withPrefix("recipes/")));
+    }
+    private void addCustomCraftingRecipe(RecipeOutput recipeOutput, Function<CraftingBookCategory, ? extends CustomRecipe> customRecipeFactory,
+                                         CraftingBookCategory category, String recipeIdString) {
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
+                recipeIdString);
+
+        CustomRecipe recipe = customRecipeFactory.apply(category);
+        recipeOutput.accept(recipeId, recipe, null);
     }
 
     private void addCrusherRecipe(RecipeOutput recipeOutput, Ingredient input, ItemStack output, String recipeIngredientName) {
@@ -364,5 +391,30 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
 
         PlantGrowthChamberRecipe recipe = new PlantGrowthChamberRecipe(outputs, input, soilType, fluid, fluidConsumption, ticks);
         recipeOutput.accept(recipeId, recipe, null);
+    }
+
+    private void addPlantGrowthChamberSoilRecipe(RecipeOutput recipeOutput, Ingredient input,
+                                                 ResourceKey<SoilType> soilType,
+                                                 double speedMultiplier,
+                                                 double fluidConsumptionMultiplier, double energyConsumptionMultiplier,
+                                                 String recipeIngredientName) {
+        ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "growing/soil/" +
+                recipeIngredientName);
+
+        PlantGrowthChamberSoilRecipe recipe = new PlantGrowthChamberSoilRecipe(input, soilType,
+                speedMultiplier, fluidConsumptionMultiplier, energyConsumptionMultiplier);
+        recipeOutput.accept(recipeId, recipe, null);
+    }
+
+    private Ingredient ingredientOf(ItemLike item) {
+        return Ingredient.of(item);
+    }
+
+    private Ingredient ingredientOf(ItemLike... items) {
+        return Ingredient.of(items);
+    }
+
+    private Ingredient ingredientOf(TagKey<Item> tagKey) {
+        return Ingredient.of(tagKey);
     }
 }
