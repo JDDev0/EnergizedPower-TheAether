@@ -1,4 +1,4 @@
-package me.jddev0.epta.integeration.emi;
+package me.jddev0.epta.integration.emi;
 
 import com.aetherteam.aether.block.AetherBlocks;
 import dev.emi.emi.api.EmiEntrypoint;

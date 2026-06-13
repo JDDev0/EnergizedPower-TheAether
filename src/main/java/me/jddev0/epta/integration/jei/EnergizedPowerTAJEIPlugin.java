@@ -1,31 +1,37 @@
-package me.jddev0.epta.integeration.rei;
+package me.jddev0.epta.integration.jei;
 
 import com.aetherteam.aether.block.AetherBlocks;
+import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.epta.recipe.AetherFarmlandCraftingRecipe;
-import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
-import me.shedaniel.rei.api.client.registry.display.DisplayRegistry;
-import me.shedaniel.rei.forge.REIPluginClient;
-import me.shedaniel.rei.plugin.common.displays.crafting.DefaultCraftingDisplay;
 import me.shedaniel.rei.plugincompatibilities.api.REIPluginCompatIgnore;
+import mezz.jei.api.IModPlugin;
+import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.registration.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 
-@REIPluginClient
+@JeiPlugin
 @REIPluginCompatIgnore
-public class EnergizedPowerTAREIPlugin implements REIClientPlugin {
+public class EnergizedPowerTAJEIPlugin implements IModPlugin {
     @Override
-    public String getPluginProviderName() {
-        return "EnergizedPower TA";
+    public ResourceLocation getPluginUid() {
+        return ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, "jei_plugin");
     }
 
     @Override
-    public void registerDisplays(DisplayRegistry registry) {
+    public void registerRecipes(IRecipeRegistration registration) {
+        RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
+
         //Add aether farmland special crafting recipe if loaded
-        Optional<RecipeHolder<CraftingRecipe>> recipeOptional = registry.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING).stream().
+        Optional<RecipeHolder<CraftingRecipe>> recipeOptional = recipeManager.getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.CRAFTING).stream().
                 filter(recipe -> recipe.value() instanceof AetherFarmlandCraftingRecipe).findFirst();
         if(recipeOptional.isPresent()) {
             ShapelessRecipe recipe = new ShapelessRecipe("", CraftingBookCategory.MISC, new ItemStack(AetherBlocks.AETHER_FARMLAND),
@@ -34,7 +40,7 @@ public class EnergizedPowerTAREIPlugin implements REIClientPlugin {
                             Ingredient.of(AetherBlocks.AETHER_DIRT)
                     }));
 
-            registry.add(DefaultCraftingDisplay.of(new RecipeHolder(recipeOptional.get().id(), recipe)));
+            registration.addRecipes(RecipeTypes.CRAFTING, Arrays.asList(new RecipeHolder(recipeOptional.get().id(), recipe)));
         }
     }
 }
