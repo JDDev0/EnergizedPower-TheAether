@@ -209,6 +209,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 EPSoilTypes.GRASS, 1.1, 1.0, 1.0, "aether_grass");
         addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.ENCHANTED_AETHER_GRASS_BLOCK),
                 EPSoilTypes.GRASS, 1.3, 1.0, 1.0, "enchanted_aether_grass");
+        addPlantGrowthChamberSoilRecipe(output, ingredientOf(AetherBlocks.HOLYSTONE),
+                EPSoilTypes.STONE, 0.5, 2.0, 2.0, "holystone");
     }
 
     private static void addHammerCraftingRecipe(RecipeOutput output, ItemLike materialInput, ItemLike hammerItem) {
