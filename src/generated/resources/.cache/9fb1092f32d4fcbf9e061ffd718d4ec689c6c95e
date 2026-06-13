@@ -1,4 +1,4 @@
-// 1.21.1	2026-06-13T12:21:07.022280282	Recipes
+// 1.21.1	2026-06-13T12:25:06.171706323	Recipes
 544fd4f70a6fa2a0fc48589be65f88d82627c76b data/energizedpowerta/advancement/recipes/compat/aether/crafting/gravitite_hammer.json
 40862a9078858e3ac90e12a6f6d18b822bd66dc7 data/energizedpowerta/advancement/recipes/compat/aether/crafting/holystone_hammer.json
 602afa195c26819398f1375bc6a4a26d2f3e83d7 data/energizedpowerta/advancement/recipes/compat/aether/crafting/item_conveyor_belt_loader.json
@@ -19,7 +19,7 @@ bc8dfbd0103e39922920e82e507c1937798c3df5 data/energizedpowerta/recipe/compat/aet
 ed566327fbff33388c168ed0ad499be42b9e250e data/energizedpowerta/recipe/compat/aether/crafting/skyroot_hammer.json
 2956dbb9331a56928bc62a95abd164fb99fd609b data/energizedpowerta/recipe/compat/aether/crafting/zanite_hammer.json
 76edf0e0d85215737d29d9c93ef664ea6a1b516e data/energizedpowerta/recipe/compat/aether/crusher/holystone_from_crushing_holystone_bricks.json
-aaa88e3a7fe372f2cfa5d17f5b5ca92b8d655c0f data/energizedpowerta/recipe/compat/aether/growing/blue_berry_from_growing_berry_bush_stem.json
+a5cb329ee9d0edb4d0b11d9c2a71ec51f3511d30 data/energizedpowerta/recipe/compat/aether/growing/blue_berry_from_growing_berry_bush_stem.json
 b0adeeaee45a96d59cad567e6390621c505c4847 data/energizedpowerta/recipe/compat/aether/growing/purple_flower_from_growing_purple_flower.json
 2793f26d2a427e15c0d9f787d9329b2f0c7c3f86 data/energizedpowerta/recipe/compat/aether/growing/soil/aether_dirt.json
 c247cf966b8a64a2ea1ac728a0c817be2f46ef1c data/energizedpowerta/recipe/compat/aether/growing/soil/aether_farmland.json
