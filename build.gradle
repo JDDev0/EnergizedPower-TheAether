@@ -4,6 +4,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '7.0.165'
+    id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
 }
 
 version = mod_version
@@ -148,15 +149,16 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     // Energized Power dependency
-    compileOnly "curse.maven:energized-power-782147:5797585"
+    compileOnly "curse.maven:energized-power-782147:8238851"
 
-    localRuntime "curse.maven:energized-power-782147:5797585"
+    localRuntime "curse.maven:energized-power-782147:8238851"
 
     // The Aether
-    compileOnly "curse.maven:aether-255308:5904253"
+    compileOnly "curse.maven:aether-255308:7043502"
 
-    localRuntime "curse.maven:aether-255308:5904253"
-    localRuntime "curse.maven:owo-lib-532610:5900556"
+    localRuntime "curse.maven:aether-255308:7043502"
+    localRuntime "curse.maven:accessories-938917:7583320"
+    localRuntime "curse.maven:owo-lib-532610:6785734"
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -207,6 +209,37 @@ publishing {
     repositories {
         maven {
             url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+publishMods {
+    displayName = "Energized Power - TA - " + "1.21.1" + " - v" + project.mod_version.split("\\+")[0] + " [NeoForge]"
+    changelog = new File("CHANGELOG.md").exists()?new File("CHANGELOG.md").getText("UTF-8"):""
+    type = BETA //TODO change to STABLE if v3.0.0 is no longer in beta
+    file = jar.archiveFile
+    modLoaders.add("neoforge")
+
+    dryRun = project.mod_version.contains("dev")
+
+    if(project.hasProperty('MODRINTH_TOKEN')) {
+        modrinth {
+            accessToken = getProperty('MODRINTH_TOKEN') as String
+            projectId = "3tCbCCSA"
+            minecraftVersionList("1.21.1")
+            requires("energized-power", "aether")
+        }
+    }
+
+    if(project.hasProperty('CURSEFORGE_TOKEN')) {
+        curseforge {
+            accessToken = getProperty('CURSEFORGE_TOKEN') as String
+            projectId = "1114929"
+            minecraftVersionList("1.21.1")
+            requires("energized-power", "aether")
+            client = true
+            server = true
+            javaVersions.add(JavaVersion.VERSION_21)
         }
     }
 }
