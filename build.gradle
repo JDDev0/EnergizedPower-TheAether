@@ -1,7 +1,7 @@
 import net.fabricmc.loom.LoomGradleExtension
 
 plugins {
-    id 'fabric-loom' version '1.7-SNAPSHOT'
+    id 'fabric-loom' version '1.16-SNAPSHOT'
     id 'maven-publish'
     id "me.modmuss50.mod-publish-plugin" version "2.0.0-beta.2"
 }
@@ -24,11 +24,6 @@ repositories {
             username = project.findProperty("gpr.user")
             password = project.findProperty("gpr.key")
         }
-    }
-
-    maven {
-        name "OctoStudios"
-        url "https://maven.octo-studios.com/releases"
     }
 
     maven {
@@ -111,6 +106,9 @@ dependencies {
     modLocalRuntime "io.wispforest:owo-lib:0.12.15.4+1.21"
     modLocalRuntime 'com.electronwill.night-config:core:3.7.4'
     modLocalRuntime 'com.electronwill.night-config:toml:3.7.3'
+
+    //Fix for Aether enum extensions
+    modLocalRuntime "me.shedaniel:mm:2.4.1"
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
@@ -198,12 +196,4 @@ publishMods {
 //Dummy task to fix post sync error caused by NeoGradle
 tasks.register("idePostSync") {
 
-}
-
-// IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
-idea {
-    module {
-        downloadSources = true
-        downloadJavadoc = true
-    }
 }
