@@ -8,8 +8,8 @@ import me.jddev0.epta.item.EPTAItems;
 import me.jddev0.epta.mixin.item.ItemRecipeRemainderSetter;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.CreativeModeTab;
 import org.slf4j.Logger;
 
 import java.util.function.Consumer;
@@ -45,7 +45,7 @@ public class EnergizedPowerTAMod implements ModInitializer {
         });
     }
 
-    private void addCreativeTabFor(RegistryKey<ItemGroup> groupKey,
+    private void addCreativeTabFor(ResourceKey<CreativeModeTab> groupKey,
                                    Consumer<CreativeTabEntriesHelper> consumer) {
         ItemGroupEvents.modifyEntriesEvent(groupKey).
                 register(entries -> consumer.accept(new CreativeTabEntriesHelper(entries)));
@@ -53,7 +53,7 @@ public class EnergizedPowerTAMod implements ModInitializer {
 
     public static void onSkyrootDirtyWaterBucketSetRecipeRemainderHook() {
         if(isEPATLoaded && isAetherLoaded) {
-            ((ItemRecipeRemainderSetter)EPTAItems.SKYROOT_DIRTY_WATER_BUCKET).setRecipeRemainder(AetherItems.SKYROOT_BUCKET.get());
+            ((ItemRecipeRemainderSetter)EPTAItems.SKYROOT_DIRTY_WATER_BUCKET).setCraftingRemainingItem(AetherItems.SKYROOT_BUCKET.get());
         }
     }
 }

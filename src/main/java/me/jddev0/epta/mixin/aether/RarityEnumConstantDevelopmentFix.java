@@ -1,7 +1,7 @@
 package me.jddev0.epta.mixin.aether;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Rarity;
+import net.minecraft.world.item.Rarity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

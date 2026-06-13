@@ -1,26 +1,29 @@
 package me.jddev0.epta.item;
 
 import me.jddev0.ep.component.EPDataComponentTypes;
-import net.minecraft.item.*;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.Unit;
-import net.minecraft.util.math.random.Random;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.TieredItem;
 
-public class HammerItemFix extends ToolItem {
-    private final Random random = Random.create();
+public class HammerItemFix extends TieredItem {
+    private final RandomSource random = RandomSource.create();
 
-    public HammerItemFix(ToolMaterial tier, Item.Settings props) {
+    public HammerItemFix(Tier tier, Item.Properties props) {
         super(tier, props.component(EPDataComponentTypes.NO_REPAIR, Unit.INSTANCE));
     }
 
-    public boolean canRepair(ItemStack itemStack, ItemStack ingredient) {
+    public boolean isValidRepairItem(ItemStack itemStack, ItemStack ingredient) {
         return false;
     }
 
     public ItemStack getRecipeRemainder(ItemStack itemStack) {
         ItemStack copy = itemStack.copy();
-        if (copy.isDamageable()) {
-            int i = copy.getDamage() + 1;
-            copy.setDamage(i);
+        if (copy.isDamageableItem()) {
+            int i = copy.getDamageValue() + 1;
+            copy.setDamageValue(i);
             if (i >= copy.getMaxDamage()) {
                 copy.setCount(0);
             }
@@ -29,7 +32,7 @@ public class HammerItemFix extends ToolItem {
         return copy;
     }
 
-    public boolean hasRecipeRemainder() {
+    public boolean hasCraftingRemainingItem() {
         return true;
     }
 }

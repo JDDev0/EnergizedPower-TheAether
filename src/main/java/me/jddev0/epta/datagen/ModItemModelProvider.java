@@ -1,16 +1,16 @@
 package me.jddev0.epta.datagen;
 
 import me.jddev0.epta.item.EPTAItems;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.ModelIds;
-import net.minecraft.data.client.Models;
-import net.minecraft.item.Item;
-import net.minecraft.util.Identifier;
+import net.minecraft.data.models.ItemModelGenerators;
+import net.minecraft.data.models.model.ModelLocationUtils;
+import net.minecraft.data.models.model.ModelTemplates;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 public class ModItemModelProvider {
-    private final ItemModelGenerator generator;
+    private final ItemModelGenerators generator;
 
-    ModItemModelProvider(ItemModelGenerator generator) {
+    ModItemModelProvider(ItemModelGenerators generator) {
         this.generator = generator;
     }
 
@@ -27,9 +27,9 @@ public class ModItemModelProvider {
         basicItem(EPTAItems.SKYROOT_DIRTY_WATER_BUCKET);
     }
 
-    private Identifier basicItem(Item item) {
-        generator.register(item, Models.GENERATED);
+    private ResourceLocation basicItem(Item item) {
+        generator.generateFlatItem(item, ModelTemplates.FLAT_ITEM);
 
-        return ModelIds.getItemModelId(item);
+        return ModelLocationUtils.getModelLocation(item);
     }
 }

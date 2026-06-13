@@ -4,17 +4,16 @@ import com.aetherteam.aether.AetherTags;
 import me.jddev0.ep.fluid.EPFluids;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.minecraft.registry.RegistryWrapper;
-
+import net.minecraft.core.HolderLookup;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
-    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> lookupProvider) {
+    public ModBlockTagProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(output, lookupProvider);
     }
 
     @Override
-    protected void configure(RegistryWrapper.WrapperLookup lookupProvider) {
+    protected void addTags(HolderLookup.Provider lookupProvider) {
         getOrCreateTagBuilder(AetherTags.Blocks.ALLOWED_BUCKET_PICKUP).
                 add(EPFluids.DIRTY_WATER_BLOCK);
     }
