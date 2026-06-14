@@ -1,5 +1,5 @@
-// 1.21.1	2026-06-13T13:31:17.137540353	Energized Power - The Aether/Recipes
-77de05a984afac9a4489b228008f2304f9c540e0 data/energizedpowerta/recipe/compat/aether/crafting/aether_farmland.json
+// 1.21.1	2026-06-14T17:21:50.971691026	Energized Power - The Aether/Recipes
+246508bf77b0d6bc2041e44f77f9301bcd8740fe data/energizedpowerta/recipe/compat/aether/crafting/aether_farmland.json
 5169a682d1f4f64b945913449afff1282220f315 data/energizedpowerta/recipe/compat/aether/sawmill/skyroot_planks_from_sawing_skyroot_hammer.json
 2793f26d2a427e15c0d9f787d9329b2f0c7c3f86 data/energizedpowerta/recipe/compat/aether/growing/soil/aether_dirt.json
 602afa195c26819398f1375bc6a4a26d2f3e83d7 data/energizedpowerta/advancement/recipes/compat/aether/crafting/item_conveyor_belt_loader.json

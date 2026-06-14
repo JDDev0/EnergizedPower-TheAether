@@ -6,7 +6,6 @@ import me.jddev0.ep.item.CreativeTabEntriesHelper;
 import me.jddev0.ep.item.EPCreativeModeTab;
 import me.jddev0.epta.item.EPTAItems;
 import me.jddev0.epta.mixin.item.ItemRecipeRemainderSetter;
-import me.jddev0.epta.recipe.EPTARecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.resources.ResourceKey;
@@ -27,7 +26,6 @@ public class EnergizedPowerTAMod implements ModInitializer {
         isEPATLoaded = true;
 
         EPTAItems.register();
-        EPTARecipes.register();
 
         addCreativeTab();
 

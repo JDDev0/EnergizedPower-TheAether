@@ -25,15 +25,6 @@
 		],
 		"client": [
 			"me.jddev0.epta.EnergizedPowerTAModClient"
-		],
-		"rei_client": [
-			"me.jddev0.epta.integration.rei.EnergizedPowerTAREIPlugin"
-		],
-		"jei_mod_plugin": [
-			"me.jddev0.epta.integration.jei.EnergizedPowerTAJEIPlugin"
-		],
-		"emi": [
-			"me.jddev0.epta.integration.emi.EnergizedPowerTAEMIPlugin"
 		]
 	},
 	"mixins": [
@@ -45,7 +36,7 @@
 		"java": ">=21",
 		"fabric-api": "*",
 
-		"energizedpower": ">=3.0.0-beta.2",
+		"energizedpower": ">=3.0.0-beta.3",
 
 		"aether": "*"
 	},

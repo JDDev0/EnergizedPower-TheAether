@@ -12,7 +12,6 @@ import me.jddev0.ep.soil.EPSoilTypes;
 import me.jddev0.ep.soil.SoilType;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.epta.item.EPTAItems;
-import me.jddev0.epta.recipe.AetherFarmlandCraftingRecipe;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.fabricmc.fabric.api.tag.convention.v2.ConventionalItemTags;
@@ -38,7 +37,6 @@ import net.minecraft.world.level.material.Fluids;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 public class ModRecipeProvider extends FabricRecipeProvider {
     private static final String THE_AETHER_MOD_ID = Aether.MODID;
@@ -128,7 +126,8 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_MERGER_ITEM), CraftingBookCategory.MISC);
     }
     private void buildCustomCraftingRecipes(RecipeOutput output) {
-        addCustomCraftingRecipe(output, AetherFarmlandCraftingRecipe::new, CraftingBookCategory.MISC,
+        addCustomCraftingRecipe(output,
+                new FarmlandCraftingRecipe(ingredientOf(AetherBlocks.AETHER_DIRT), new ItemStack(AetherBlocks.AETHER_FARMLAND)),
                 "aether_farmland");
     }
 
@@ -267,13 +266,11 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         );
         output.accept(recipeId, recipe, advancementBuilder.build(recipeId.withPrefix("recipes/")));
     }
-    private void addCustomCraftingRecipe(RecipeOutput recipeOutput, Function<CraftingBookCategory, ? extends CustomRecipe> customRecipeFactory,
-                                         CraftingBookCategory category, String recipeIdString) {
+    private void addCustomCraftingRecipe(RecipeOutput recipeOutput, CustomRecipe customRecipe, String recipeIdString) {
         ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
                 recipeIdString);
 
-        CustomRecipe recipe = customRecipeFactory.apply(category);
-        recipeOutput.accept(recipeId, recipe, null);
+        recipeOutput.accept(recipeId, customRecipe, null);
     }
 
     private void addCrusherRecipe(RecipeOutput RecipeExporter, Ingredient input, ItemStack output, String recipeIngredientName) {
