@@ -12,7 +12,6 @@ import me.jddev0.ep.soil.SoilType;
 import me.jddev0.epta.EnergizedPowerTAMod;
 import me.jddev0.ep.recipe.*;
 import me.jddev0.epta.item.EPTAItems;
-import me.jddev0.epta.recipe.AetherFarmlandCraftingRecipe;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -39,7 +38,6 @@ import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 public class ModRecipeProvider extends RecipeProvider implements IConditionBuilder {
     private static final String THE_AETHER_MOD_ID = Aether.MODID;
@@ -129,7 +127,8 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         }, new ItemStack(EPBlocks.BASIC_ITEM_CONVEYOR_BELT_MERGER_ITEM.get()), CraftingBookCategory.MISC);
     }
     private void buildCustomCraftingRecipes(RecipeOutput output) {
-        addCustomCraftingRecipe(output, AetherFarmlandCraftingRecipe::new, CraftingBookCategory.MISC,
+        addCustomCraftingRecipe(output,
+                new FarmlandCraftingRecipe(ingredientOf(AetherBlocks.AETHER_DIRT), new ItemStack(AetherBlocks.AETHER_FARMLAND)),
                 "aether_farmland");
     }
 
@@ -268,13 +267,11 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         );
         output.accept(recipeId, recipe, advancementBuilder.build(recipeId.withPrefix("recipes/")));
     }
-    private void addCustomCraftingRecipe(RecipeOutput recipeOutput, Function<CraftingBookCategory, ? extends CustomRecipe> customRecipeFactory,
-                                         CraftingBookCategory category, String recipeIdString) {
+    private void addCustomCraftingRecipe(RecipeOutput recipeOutput, CustomRecipe customRecipe, String recipeIdString) {
         ResourceLocation recipeId = ResourceLocation.fromNamespaceAndPath(EnergizedPowerTAMod.MODID, PATH_PREFIX + "crafting/" +
                 recipeIdString);
 
-        CustomRecipe recipe = customRecipeFactory.apply(category);
-        recipeOutput.accept(recipeId, recipe, null);
+        recipeOutput.accept(recipeId, customRecipe, null);
     }
 
     private void addCrusherRecipe(RecipeOutput recipeOutput, Ingredient input, ItemStack output, String recipeIngredientName) {

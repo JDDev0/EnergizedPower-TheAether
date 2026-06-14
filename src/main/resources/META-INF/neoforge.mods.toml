@@ -67,7 +67,7 @@ description='''${mod_description}'''
     modId="energizedpower"
     # Does this dependency have to exist - if not, ordering below must be specified
     mandatory=true #mandatory
-    versionRange="[3.0.0-beta.2,)"
+    versionRange="[3.0.0-beta.3,)"
     ordering="AFTER"
     side="BOTH"
 
